@@ -1,5 +1,5 @@
 .searchbar {
-  width: 80%;
+  width: 60%;
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -9,14 +9,16 @@
   box-shadow: $shadow-main;
   input {
     width: 100%;
-    font-size: 125%;
+    font-size: 150%;
     color: $color-black;
     border-style: none;
     background-color: rgba(0, 0, 0, 0.0);
+    text-align: center;
   }
   input::placeholder {
     color: $color-grey;
     font-size: 100%;
+    text-align: center;
   }
   div {
     cursor: pointer;

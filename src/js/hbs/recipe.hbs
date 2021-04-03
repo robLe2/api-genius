@@ -1,12 +1,16 @@
-<div class=""
-
-<h1>{{title}}</h1>
-<img src="{{image}}"/>
-<a href="{{url}}">{{source}}</a>
-<p>For {{number}} persons</p>
-<p>This meal is {{calories}}</p>
-<ul class="ingredient_list">
-{{#each ingredients}}
-<li>{{this}}</li>
-{{/each}}
-</ul>
+<div class="recipe-informations">
+    <img src="{{image}}"/>
+    <div>
+        <h1>{{title}}</h1>
+        <p>Source website : <a href="{{url}}" target="_blank">{{source}}</a></p>
+        <p>For {{number}} persons</p>
+        <p>This meal is {{calories}} kcal/person</p>
+    </div>
+</div>
+<div class="recipe-ingredients">
+    <ul class="ingredient_list">
+        {{#each ingredients}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</div>

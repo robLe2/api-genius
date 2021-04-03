@@ -4,53 +4,48 @@ import RecipeTemplate from './hbs/recipe.hbs'
 export default class Recipe {
     constructor () {
         this.initEls();
-        this.initEvents();
     }
 
     initEls() {
         this.$els = {
-            container: $('.js-container'),
             recipe: $('.right-part'),
         }
     }
 
-    initEvents () {
-        this.getRecipe();
-    }
-
-    getRecipe () {
+    getRecipe (name, dishtype, calories) {
+        console.log('INPUT : '+name+' DISHTYPE : '+dishtype+' CALORIES : '+calories);
+        const dishtypeParam = dishtype ? `&dishType=${dishtype}` : "";
+        const caloriesParam = calories ? `&calories=${calories}` : "";
         const api = {
-            endpoint: "https://api.edamam.com/search?q=chicken&app_id=04d4343d&app_key=295d476b41b04b07f017dab57f8a7fc4"
-        };
+            endpoint: `https://api.edamam.com/search?app_id=04d4343d&app_key=295d476b41b04b07f017dab57f8a7fc4&q=${name+dishtypeParam+caloriesParam}&to=25`
+        }
+
         $.getJSON(api.endpoint)
             .then((response) => {
                 this.renderRecipe(response);
+                console.log(response);
             })
             .catch((err) => {
                 console.log('Error Recipe', err);
+                alert('No matching results');
             });
 
     }
 
     renderRecipe (recipeData) {
-        //console.log(recipeData); //Affiche la data correspondant au endpoint
+        console.log(recipeData); //Affiche la data correspondant au endpoint
         const recipeCount = recipeData.to;
         const recipeRand = Math.floor(Math.random() * recipeCount);
-        console.log(recipeRand);
+        console.log("RANDOM DE LA RECETTE "+recipeRand);
 
         const recipeTitle = recipeData.hits[recipeRand].recipe.label;
         const recipeImage = recipeData.hits[recipeRand].recipe.image;
         const recipeUrl = recipeData.hits[recipeRand].recipe.url;
         const recipeSource = recipeData.hits[recipeRand].recipe.source;
         const recipeYield = recipeData.hits[recipeRand].recipe.yield;
-        const recipeCalories = recipeData.hits[recipeRand].recipe.calories;
+        const recipeCalories = Math.floor(recipeData.hits[recipeRand].recipe.calories/recipeYield);
         const recipeIngredients = recipeData.hits[recipeRand].recipe.ingredientLines;
 
-        console.log(
-            'Titre : '+recipeTitle+' Url : '+recipeUrl+
-            ' Source : '+recipeSource+' Nb personnes : '+recipeYield+' Cal : '+recipeCalories+
-            ' Ingrédients : '+recipeIngredients[1]
-        );
 
         const recipe = RecipeTemplate({
             title: recipeTitle,
@@ -61,7 +56,9 @@ export default class Recipe {
             calories: recipeCalories,
             ingredients: recipeIngredients
         });
+        this.$els.recipe.empty();
         this.$els.recipe.append(recipe);
-        this.$els.container.addClass('is-ready');
+        $('div.right-part').show();
+        this.$els.recipe.addClass('is-ready');
     }
 }

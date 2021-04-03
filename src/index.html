@@ -8,36 +8,33 @@
     <div class="wrap">
         <div class="left-part">
             <div class="searchbar">
-                <input type="text" id="searched-recipe-name" placeholder="Chercher une  recette par nom">
-                <div id="search-button" onclick="">
-                    <img src="img/searchIcon.svg">
-                </div>
+                <input class="input" type="text" id="searched-recipe-name" placeholder="Type an ingredient" onfocus="this.placeholder=''" onblur="this.placeholder='Type an ingredient'">
             </div>
             <div class="filtered-search">
-                <p>Filtrer la recherche</p>
+                <p>Filter the research</p>
                 <div>
                     <div class="left-select">
-                        <label for="dishtype-select">Type de recette</label>
+                        <label for="dishtype-select">Dish type</label>
                         <select name="dishtype" id="dishtype-select">
-                            <option value="all">Toutes</option>
-                            <option value="starter">Entrée</option>
-                            <option value="main-course">Plat</option>
+                            <option value="">Any</option>
+                            <option value="starter">Starter</option>
+                            <option value="main-course">Main course</option>
                             <option value="dessert">Dessert</option>
                         </select>
                     </div>
                     <div class="right-select">
-                        <label for="diet-select">Type de régime</label>
-                        <select name="diet" id="diet-select">
-                            <option value="none">Aucun</option>
-                            <option value="pork-free">Sans porc</option>
-                            <option value="gluten-free">Sans gluten</option>
-                            <option value="vegan">Vegan</option>
+                        <label for="calories-select">kcal/person</label>
+                        <select name="calories" id="calories-select">
+                            <option value="">Any</option>
+                            <option value="300+">Minimum 300</option>
+                            <option value="200-500">Between 200 and 400</option>
+                            <option value="300">Maximum 300</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="apply-filter">
-                <button>Appliquer les filtres</button>
+                <button>Get a recipe !</button>
             </div>
         </div>
 
