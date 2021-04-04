@@ -13,11 +13,13 @@ export default class Recipe {
     }
 
     getRecipe (name, dishtype, calories) {
-        console.log('INPUT : '+name+' DISHTYPE : '+dishtype+' CALORIES : '+calories);
+
+        //console.log('INPUT : '+name+' DISHTYPE : '+dishtype+' CALORIES : '+calories);
         const dishtypeParam = dishtype ? `&dishType=${dishtype}` : "";
         const caloriesParam = calories ? `&calories=${calories}` : "";
         const api = {
-            endpoint: `https://api.edamam.com/search?app_id=04d4343d&app_key=295d476b41b04b07f017dab57f8a7fc4&q=${name+dishtypeParam+caloriesParam}&to=25`
+            endpoint: `https://api.edamam.com/search?app_id=04d4343d&app_key=295d476b
+            41b04b07f017dab57f8a7fc4&q=${name+dishtypeParam+caloriesParam}&to=25`
         }
 
         $.getJSON(api.endpoint)
@@ -33,10 +35,9 @@ export default class Recipe {
     }
 
     renderRecipe (recipeData) {
-        console.log(recipeData); //Affiche la data correspondant au endpoint
+        //console.log(recipeData); //Affiche la data correspondant au endpoint
         const recipeCount = recipeData.to;
         const recipeRand = Math.floor(Math.random() * recipeCount);
-        console.log("RANDOM DE LA RECETTE "+recipeRand);
 
         const recipeTitle = recipeData.hits[recipeRand].recipe.label;
         const recipeImage = recipeData.hits[recipeRand].recipe.image;
